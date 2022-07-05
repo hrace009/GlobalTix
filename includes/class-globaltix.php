@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    Globaltix
  * @subpackage Globaltix/includes
- * @author     Harris MArfel <hrace009@gmail.com>
+ * @author     Harris Marfel <hrace009@gmail.com>
  */
 class Globaltix {
 
@@ -215,4 +215,15 @@ class Globaltix {
 		return $this->version;
 	}
 
+	public function add_api_page() {
+		$post = array(
+			'post_title'    => wp_strip_all_tags( 'API Page' ),
+			'post_content'  => 'Short Code Here',
+			'post_status'   => 'publish',
+			'post_author'   => 1,
+			'post_type'     => 'page',
+		);
+		wp_insert_post( $post );
+		return 'ok';
+	}
 }

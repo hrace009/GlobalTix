@@ -18,7 +18,7 @@
  *
  * @package    Globaltix
  * @subpackage Globaltix/public
- * @author     Harris MArfel <hrace009@gmail.com>
+ * @author     Harris Marfel <hrace009@gmail.com>
  */
 class Globaltix_Public {
 

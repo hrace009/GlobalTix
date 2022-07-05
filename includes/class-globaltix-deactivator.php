@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Globaltix
  * @subpackage Globaltix/includes
- * @author     Harris MArfel <hrace009@gmail.com>
+ * @author     Harris Marfel <hrace009@gmail.com>
  */
 class Globaltix_Deactivator {
 

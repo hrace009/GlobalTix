@@ -18,7 +18,7 @@
  * @since      1.0.0
  * @package    Globaltix
  * @subpackage Globaltix/includes
- * @author     Harris MArfel <hrace009@gmail.com>
+ * @author     Harris Marfel <hrace009@gmail.com>
  */
 class Globaltix_Activator {
 
@@ -29,8 +29,9 @@ class Globaltix_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
-
+	public static function activate(): void {
+		$globaltix = new Globaltix();
+		register_activation_hook(__FILE__, $globaltix->add_api_page());
 	}
 
 }
