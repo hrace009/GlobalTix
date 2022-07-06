@@ -41,6 +41,16 @@ class Globaltix_Admin {
 	private $version;
 
 	/**
+	 * The Globaltix settings field of this plugin.
+	 *
+	 * @since   1.0.0
+	 * @access  private
+	 * @var     string $globaltix_settings The current PW settings field of this plugin.
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	private $globaltix_settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -51,6 +61,7 @@ class Globaltix_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->globaltix_settings = get_option('globaltix_settings');
 
 	}
 
