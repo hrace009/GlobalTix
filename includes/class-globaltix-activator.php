@@ -32,6 +32,15 @@ class Globaltix_Activator {
 	public static function activate(): void {
 		$globaltix = new Globaltix();
 		register_activation_hook(__FILE__, $globaltix->add_api_page());
+
+		if (!get_option('globaltix_settings')) {
+			add_option('globaltix_settings');
+			$default = array(
+				'username' => 'reseller@globaltix.com',
+				'password' => '12345',
+			);
+			update_option('globaltix_settings', $default);
+		}
 	}
 
 }
