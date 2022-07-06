@@ -28,6 +28,17 @@ class GlobaltixPage {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+
+	/**
+	 * The Globaltix settings field of this plugin.
+	 *
+	 * @since   1.0.0
+	 * @access  private
+	 * @var     string $globaltix_settings The current PW settings field of this plugin.
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	private $globaltix_settings;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -42,5 +53,59 @@ class GlobaltixPage {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+		$this->globaltix_settings = get_option('globaltix_settings');
+	}
+
+	/**
+	 * Render settings for username field
+	 *
+	 * @since   1.0.0
+	 * @access  public
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function globaltix_username_settings_render()
+	{
+		printf(
+			'<input type="text" name="globaltix_username_settings[username]" id="username" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Username, eg. you@email.com', 'globaltix') . '" %s >',
+			isset($this->globaltix_settings['username']) ? esc_attr($this->globaltix_settings['username']) : '', 'enabled'
+		);
+	}
+
+	/**
+	 * Render settings for password field
+	 *
+	 * @since   1.0.0
+	 * @access  public
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function globaltix_password_settings_render()
+	{
+		printf(
+			'<input type="password" name="globaltix_password_settings[password]" id="password" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Password, eg. secrepassword', 'globaltix') . '" %s >',
+			isset($this->globaltix_settings['password']) ? esc_attr($this->globaltix_settings['password']) : '', 'enabled'
+		);
+	}
+
+	/**
+	 * Render settings for emailsettings field
+	 *
+	 * @param array $input
+	 * @return  array $sanitary_values
+	 * @since   1.0.0
+	 * @access  public
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function globaltix_settings_sanitize($input)
+	{
+		$sanitary_values = array();
+
+		if (isset($input['username'])) {
+			$sanitary_values['username'] = strtolower(sanitize_text_field($input['username']));
+		}
+		if (isset($input['password'])) {
+			$sanitary_values['password'] = strtolower(sanitize_text_field($input['password']));
+		}
+
+		return $sanitary_values;
 	}
 }
