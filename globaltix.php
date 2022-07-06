@@ -49,7 +49,7 @@ define('GLOBALTIX_URL', plugin_dir_url(__FILE__));
  * This action is documented in includes/class-globaltix-activator.php
  */
 function activate_globaltix() {
-	require_once GLOBALTIX_DIR . 'includes/class-globaltix-activator.php';
+	require_once (GLOBALTIX_DIR . 'includes/class-globaltix-activator.php');
 	Globaltix_Activator::activate();
 }
 
@@ -58,7 +58,7 @@ function activate_globaltix() {
  * This action is documented in includes/class-globaltix-deactivator.php
  */
 function deactivate_globaltix() {
-	require_once GLOBALTIX_DIR . 'includes/class-globaltix-deactivator.php';
+	require_once (GLOBALTIX_DIR . 'includes/class-globaltix-deactivator.php');
 	Globaltix_Deactivator::deactivate();
 }
 
