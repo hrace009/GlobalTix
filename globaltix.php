@@ -31,11 +31,25 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'GLOBALTIX_VERSION', '1.0.0' );
 
 /**
+ * Define plugin base directory.
+ * @since    1.0.0
+ * @author     Harris Marfel <hrace009@gmail.com>
+ */
+define('GLOBALTIX_DIR', dirname(__FILE__) . '/');
+
+/**
+ * Define plugin base url.
+ * @since    1.0.0
+ * @author     Harris Marfel <hrace009@gmail.com>
+ */
+define('GLOBALTIX_URL', plugin_dir_url(__FILE__));
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-globaltix-activator.php
  */
 function activate_globaltix() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-globaltix-activator.php';
+	require_once GLOBALTIX_DIR . 'includes/class-globaltix-activator.php';
 	Globaltix_Activator::activate();
 }
 
@@ -44,7 +58,7 @@ function activate_globaltix() {
  * This action is documented in includes/class-globaltix-deactivator.php
  */
 function deactivate_globaltix() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-globaltix-deactivator.php';
+	require_once GLOBALTIX_DIR . 'includes/class-globaltix-deactivator.php';
 	Globaltix_Deactivator::deactivate();
 }
 
@@ -55,7 +69,7 @@ register_deactivation_hook( __FILE__, 'deactivate_globaltix' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-globaltix.php';
+require GLOBALTIX_DIR . 'includes/class-globaltix.php';
 
 /**
  * Begins execution of the plugin.
