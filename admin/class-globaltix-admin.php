@@ -100,4 +100,14 @@ class Globaltix_Admin {
 
 	}
 
+	/**
+	 * Register plugin Admin menu side bar.
+	 *
+	 * @since   1.0.0
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function admin_menu()
+	{
+
+	}
 }
