@@ -175,6 +175,7 @@ class Globaltix {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_shortcode('List_Product', $plugin_public, 'ProductList');
 
 	}
 
@@ -221,7 +222,7 @@ class Globaltix {
 	public function add_api_page() {
 		$post = array(
 			'post_title'    => wp_strip_all_tags( 'API Page' ),
-			'post_content'  => 'Short Code Here',
+			'post_content'  => '[List_Product]',
 			'post_status'   => 'publish',
 			'post_author'   => 1,
 			'post_type'     => 'page',

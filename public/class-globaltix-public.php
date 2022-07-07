@@ -41,6 +41,16 @@ class Globaltix_Public {
 	private $version;
 
 	/**
+	 * The Globaltix settings field of this plugin.
+	 *
+	 * @since   1.0.0
+	 * @access  private
+	 * @var     string $globaltix_settings The current PW settings field of this plugin.
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	private $globaltix_settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -51,6 +61,7 @@ class Globaltix_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->globaltix_settings = get_option('globaltix_settings');
 
 	}
 
@@ -98,6 +109,22 @@ class Globaltix_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/globaltix-public.js', array( 'jquery' ), $this->version, false );
 
+	}
+
+	/**
+	 * Register the shortcode for the public-facing side of the site.
+	 *
+	 * @return string $output
+	 * @since    1.0.0
+	 * @author     Harris Marfel <hrace009@gmail.com>
+	 */
+	public function ProductList()
+	{
+		ob_start();
+		require_once GLOBALTIX_DIR . 'public/partials/globaltix-public-display.php';
+		$output = ob_get_clean();
+
+		return $output;
 	}
 
 }
