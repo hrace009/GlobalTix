@@ -45,6 +45,13 @@ define('GLOBALTIX_DIR', dirname(__FILE__) . '/');
 define('GLOBALTIX_URL', plugin_dir_url(__FILE__));
 
 /**
+ * Define globaltix API.
+ * @since    1.0.0
+ * @author     Harris Marfel <hrace009@gmail.com>
+ */
+define('GLOBALTIX_API', 'https://uat-api.globaltix.com/');
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-globaltix-activator.php
  */
