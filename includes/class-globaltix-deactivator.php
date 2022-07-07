@@ -31,6 +31,8 @@ class Globaltix_Deactivator {
 	 */
 	public static function deactivate() {
 
+		delete_option('globaltix_settings');
+
 	}
 
 }

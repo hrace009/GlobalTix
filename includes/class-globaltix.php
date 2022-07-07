@@ -226,7 +226,7 @@ class Globaltix {
 			'post_author'   => 1,
 			'post_type'     => 'page',
 		);
-		wp_insert_post( $post );
-		return 'ok';
+
+		return wp_insert_post( $post );
 	}
 }
