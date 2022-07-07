@@ -125,4 +125,31 @@ class Globaltix_Admin {
 			'Admin'
 		));
 	}
+
+	/**
+	 * init Config settings in admin page.
+	 *
+	 * @since   1.0.0
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function globaltix_settings_init()
+	{
+		$PluginAdminPage = new GlobaltixPage($this->plugin_name, $this->version);
+		register_setting('globaltix_settings_pluginPage', 'globaltix_settings', array(
+			&$PluginAdminPage,
+			'sanitize'
+		));
+		add_settings_section('globaltix_settings_pluginPage_section', '', '', 'globaltix_settings_pluginPage');
+
+		add_settings_field('username', __('Username', 'globaltix'), array(
+			&$PluginAdminPage,
+			'username_render'
+		), 'globaltix_settings_pluginPage', 'globaltix_settings_pluginPage_section');
+
+		add_settings_field('password', __('Password', 'globaltix'), array(
+			&$PluginAdminPage,
+			'password_render'
+		), 'globaltix_settings_pluginPage', 'globaltix_settings_pluginPage_section');
+
+	}
 }
