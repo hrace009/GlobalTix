@@ -11,6 +11,21 @@
  * @package    Globaltix
  * @subpackage Globaltix/admin/partials
  */
+
+settings_errors();
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+<div class="wrap">
+    <h1><?php echo __('Globaltix', 'globaltix') ?></h1>
+	<?php echo __('This setting for API Authentication', 'globaltix'); ?>
+    <div id="poststuff">
+        <form action='options.php' method='post'>
+			<?php
+			settings_fields('globaltix_settings_pluginPage');
+			do_settings_sections('globaltix_settings_pluginPage');
+			submit_button(__('Save', 'globaltix'));
+			?>
+        </form>
+    </div>
+</div>

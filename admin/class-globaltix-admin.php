@@ -119,6 +119,34 @@ class Globaltix_Admin {
 	 */
 	public function admin_menu()
 	{
+		$GlobaltixPage = new GlobaltixPage($this->plugin_name, $this->version);
+		add_menu_page(__('Globaltix', 'globaltix'), __('Globaltix', 'globaltix'), 'manage_options', 'globaltix', array(
+			&$GlobaltixPage,
+			'Admin'
+		));
+	}
 
+	/**
+	 * init settings in admin page.
+	 *
+	 * @since   1.0.0
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function globaltix_settings_init()
+	{
+		$PluginAdminPage = new GlobaltixPage($this->plugin_name, $this->version);
+		register_setting('globaltix_settings_pluginPage', 'globaltix_settings', array(
+			&$PluginAdminPage,
+			'globaltix_settings_page_sanitize'
+		));
+		add_settings_section('globaltix_settings_pluginPage_section', '', '', 'globaltix_settings_pluginPage');
+		add_settings_field('username', __('Username', 'globaltix'), array(
+			&$PluginAdminPage,
+			'globaltix_settings_username_render'
+		), 'globaltix_settings_pluginPage', 'globaltix_pluginPage_section');
+		add_settings_field('password', __('Password', 'globaltix'), array(
+			&$PluginAdminPage,
+			'globaltix_settings_password_render'
+		), 'globaltix_settings_pluginPage', 'globaltix_pluginPage_section');
 	}
 }

@@ -9,7 +9,7 @@
  * @subpackage Globaltix/admin
  * @author     Harris Marfel <hrace009@gmail.com>
  */
-class GlobaltixPage {
+class GlobaltixPage extends Globaltix_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -44,16 +44,31 @@ class GlobaltixPage {
 	 *
 	 * @param string $plugin_name The name of this plugin.
 	 * @param string $version The version of this plugin.
+	 *
 	 * @since   1.0.0
 	 * @access  public
 	 * @author  Harris Marfel <hrace009@gmail.com>
 	 */
-	public function __construct($plugin_name, $version)
+	public function __construct( $plugin_name, $version)
 	{
-
+		parent::__construct($plugin_name, $version);
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->globaltix_settings = get_option('globaltix_settings');
+	}
+
+	/**
+	 * Load partial page dashboard
+	 *
+	 * @since   1.0.0
+	 * @access  public
+	 * @author  Harris Marfel <hrace009@gmail.com>
+	 */
+	public function Admin()
+	{
+
+		require_once(GLOBALTIX_DIR . 'admin/partials/globaltix-admin-display.php');
+
 	}
 
 	/**
@@ -63,10 +78,10 @@ class GlobaltixPage {
 	 * @access  public
 	 * @author  Harris Marfel <hrace009@gmail.com>
 	 */
-	public function globaltix_username_settings_render()
+	public function globaltix_settings_username_render()
 	{
 		printf(
-			'<input type="text" name="globaltix_username_settings[username]" id="username" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Username, eg. you@email.com', 'globaltix') . '" %s >',
+			'<input type="text" name="globaltix_settings_username[username]" id="username" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Username, eg. you@email.com', 'globaltix') . '" %s >',
 			isset($this->globaltix_settings['username']) ? esc_attr($this->globaltix_settings['username']) : '', 'enabled'
 		);
 	}
@@ -78,10 +93,10 @@ class GlobaltixPage {
 	 * @access  public
 	 * @author  Harris Marfel <hrace009@gmail.com>
 	 */
-	public function globaltix_password_settings_render()
+	public function globaltix_settings_password_render()
 	{
 		printf(
-			'<input type="password" name="globaltix_password_settings[password]" id="password" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Password, eg. secrepassword', 'globaltix') . '" %s >',
+			'<input type="password" name="globaltix_settings_password[password]" id="password" value="%s" style="width: 450px;" placeholder="' . __('Your Globaltix Password, eg. secrepassword', 'globaltix') . '" %s >',
 			isset($this->globaltix_settings['password']) ? esc_attr($this->globaltix_settings['password']) : '', 'enabled'
 		);
 	}
@@ -95,7 +110,7 @@ class GlobaltixPage {
 	 * @access  public
 	 * @author  Harris Marfel <hrace009@gmail.com>
 	 */
-	public function globaltix_settings_sanitize($input)
+	public function globaltix_settings_page_sanitize($input)
 	{
 		$sanitary_values = array();
 
