@@ -84,7 +84,7 @@ class Globaltix_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/globaltix-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, GLOBALTIX_URL . 'css/globaltix-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -107,7 +107,7 @@ class Globaltix_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/globaltix-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, GLOBALTIX_URL. 'js/globaltix-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -169,7 +169,6 @@ class Globaltix_Public {
 		ob_start();
 		$items = $this->getProductList();
 		$listItems = $items->data;
-		dd($listItems);
 		require_once GLOBALTIX_DIR . 'public/partials/globaltix-public-display.php';
 		return ob_get_clean();
 	}
