@@ -120,10 +120,10 @@ class Globaltix_Admin {
 	public function admin_menu()
 	{
 		$GlobaltixPage = new GlobaltixPage($this->plugin_name, $this->version);
-		add_menu_page(__('Globaltix', 'globaltix'), __('Globaltix', 'globaltix'), 'manage_options', 'globaltix', array(
+		add_menu_page(__('GlobalTix', 'globaltix'), __('GlobalTix', 'globaltix'), 'manage_options', 'globaltix', array(
 			&$GlobaltixPage,
 			'Admin'
-		));
+		), GLOBALTIX_URL . 'globaltix.png');
 	}
 
 	/**
