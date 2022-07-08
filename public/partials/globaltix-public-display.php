@@ -11,4 +11,5 @@
  * @package    Globaltix
  * @subpackage Globaltix/public/partials
  */
+
 ?>

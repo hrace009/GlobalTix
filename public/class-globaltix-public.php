@@ -125,19 +125,28 @@ class Globaltix_Public {
 
 		$request = wp_remote_post( GLOBALTIX_API . 'api/auth/login', $args );
 		$body = wp_remote_retrieve_body($request);
+		$result = json_decode($body);
+
+		$transient  = '_globaltix_token';
+		$value      = $result->data->access_token;
+		$expiration = 3600;
+
+		set_transient( $transient, $value, $expiration );
 
 		return json_decode( $body );
 	}
 
 	public function getProductList( )
 	{
+		if ( ! get_transient('_globaltix_token') ) {
+			$this->postAuth();
+		}
+		$token = get_transient('_globaltix_token');
+
 		$args = array(
 			'headers' => array(
-				'Accept-Version: 1.0',
-                'Authorization: Bearer ',
-			),
-			'body' => array(
-				'country' => 'Singapore',
+				'Accept-Version' => '1.0',
+                'Authorization' => 'Bearer ' . $token,
 			)
 		);
 
@@ -145,7 +154,7 @@ class Globaltix_Public {
 		$response_code = wp_remote_retrieve_response_code( $request );
 		$body = wp_remote_retrieve_body($request);
 
-		return json_decode( $response_code );
+		return json_decode( $body );
 	}
 
 	/**
@@ -158,8 +167,9 @@ class Globaltix_Public {
 	public function ProductList()
 	{
 		ob_start();
-		$product = $this->getProductList();
-		dd($product);
+		$items = $this->getProductList();
+		$listItems = $items->data;
+		dd($listItems);
 		require_once GLOBALTIX_DIR . 'public/partials/globaltix-public-display.php';
 		return ob_get_clean();
 	}
