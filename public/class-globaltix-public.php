@@ -111,6 +111,43 @@ class Globaltix_Public {
 
 	}
 
+	public function postAuth()
+	{
+		$args = array(
+			'headers' => array(
+				'Content-Type' => 'application/json'
+			),
+			'body' => json_encode( array(
+				'username' => $this->globaltix_settings['username'],
+				'password' => $this->globaltix_settings['password']
+			) )
+		);
+
+		$request = wp_remote_post( GLOBALTIX_API . 'api/auth/login', $args );
+		$body = wp_remote_retrieve_body($request);
+
+		return json_decode( $body );
+	}
+
+	public function getProductList( )
+	{
+		$args = array(
+			'headers' => array(
+				'Accept-Version: 1.0',
+                'Authorization: Bearer ',
+			),
+			'body' => array(
+				'country' => 'Singapore',
+			)
+		);
+
+		$request = wp_remote_get( GLOBALTIX_API . 'api/product/list?countryId=1&cityIds=all&categoryIds=all&searchText=&page=1&lang=en', $args );
+		$response_code = wp_remote_retrieve_response_code( $request );
+		$body = wp_remote_retrieve_body($request);
+
+		return json_decode( $response_code );
+	}
+
 	/**
 	 * Register the shortcode for the public-facing side of the site.
 	 *
@@ -121,10 +158,10 @@ class Globaltix_Public {
 	public function ProductList()
 	{
 		ob_start();
+		$product = $this->getProductList();
+		dd($product);
 		require_once GLOBALTIX_DIR . 'public/partials/globaltix-public-display.php';
-		$output = ob_get_clean();
-
-		return $output;
+		return ob_get_clean();
 	}
 
 }
