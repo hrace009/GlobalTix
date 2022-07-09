@@ -175,6 +175,7 @@ class Globaltix {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_footer', $plugin_public, 'searchJavaScript');
 		$this->loader->add_shortcode('List_Product', $plugin_public, 'ProductList');
 
 	}

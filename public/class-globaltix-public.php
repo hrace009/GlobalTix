@@ -84,7 +84,7 @@ class Globaltix_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, GLOBALTIX_URL . 'css/globaltix-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, GLOBALTIX_URL . 'public/css/globaltix-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -107,7 +107,7 @@ class Globaltix_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, GLOBALTIX_URL. 'js/globaltix-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, GLOBALTIX_URL. 'public/js/globaltix-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -173,4 +173,23 @@ class Globaltix_Public {
 		return ob_get_clean();
 	}
 
+	public function searchJavaScript() {
+		?>
+		<script>
+            function search_globaltix() {
+                var input = document.getElementById("search");
+                var filter = input.value.toLowerCase();
+                var nodes = document.getElementsByClassName('product');
+
+                for (i = 0; i < nodes.length; i++) {
+                    if (nodes[i].innerText.toLowerCase().includes(filter)) {
+                        nodes[i].style.display = "block";
+                    } else {
+                        nodes[i].style.display = "none";
+                    }
+                }
+            }
+		</script>
+		<?php
+	}
 }
