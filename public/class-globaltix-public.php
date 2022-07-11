@@ -174,6 +174,8 @@ class Globaltix_Public {
 	}
 
 	public function searchJavaScript() {
+		if ( is_page('api-page'))
+		{
 		?>
 		<script>
             function search_globaltix() {
@@ -191,5 +193,6 @@ class Globaltix_Public {
             }
 		</script>
 		<?php
+		}
 	}
 }
